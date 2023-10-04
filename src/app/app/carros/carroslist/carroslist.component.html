@@ -1,0 +1,22 @@
+<span>LISTA DE CARROS</span>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="linha">Nome: </th>
+            <th class="linha">Ano: </th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        <tr *ngFor="let carro of lista">
+            <th>
+                <span *ngIf="carro.ano > 2000" class="linha">
+                <td>{{carro.nome}}</td>
+                <td>{{carro.ano}}</td>
+                </span>
+            </th>
+            
+        </tr>
+    </tbody>
+    
+</table>
