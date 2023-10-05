@@ -1,0 +1,18 @@
+
+<div class="container col-md-12">
+
+    <div class="col-md-5 offset-md-4 mb-3">
+        <label for="insertNome" > insira um nome</label>
+        <input id="insertNome"  [(ngModel)]="meuValorNome" placeholder="Nome" value="">
+    </div>
+    
+    <div class="col-md-5 offset-md-4">
+        <label for="insertIdade"> insira uma idade</label>
+        <input id="insertIdade" [(ngModel)]="meuValorIdade" placeholder="Idade" value="">
+    </div>
+    
+    <button (click)="enviaValor()" class="offset-md-5">Enviar</button>
+    
+</div>
+
+

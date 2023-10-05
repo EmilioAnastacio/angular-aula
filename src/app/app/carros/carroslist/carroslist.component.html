@@ -1,12 +1,9 @@
-
-
-
 <div class="container">
 
     <div class="row text-start">
         <h2 class="col-md-10">Lista de Pessoas</h2>
         <div class="col-md-2">
-            <input routerLink="/admin/pessoas/novo" type="button" class="btn btn-success offset-md-5" value="Cadastrar">
+            <input routerLink="/admin/carros/novo" type="button" class="btn btn-success offset-md-5" value="Cadastrar">
         </div>
     </div>
 
@@ -20,26 +17,22 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let pessoa of lista" class="col-md-12">
+                <tr *ngFor="let carro of lista" class="col-md-12">
 
                     <th class="col-md-2">
-                        <span>{{pessoa.id}}</span>
+                        <span>oi</span>
                     </th>
 
                     <th class="col-md-9 text-start">
-                        <span *ngIf="pessoa.idade > 10" class="linha text-start">
-                            <td >{{pessoa.nome}}</td>
+                        <span *ngIf="carro.ano > 10" class="linha text-start">
+                            <td >{{carro.nome}}</td>
                         </span>
                     </th>
 
                     <th>
-                        <span *ngIf="pessoa.idade > 10" class="linha">
-                            <td >{{pessoa.idade}}</td>
+                        <span *ngIf="carro.ano > 10" class="linha">
+                            <td >{{carro.ano}}</td>
                         </span>
-                    </th>
-
-                    <th>
-                        <input routerLink="/admin/pessoas/editar/{{pessoa.id}}" type="button" value="editar">
                     </th>
                 </tr>
             </tbody>
