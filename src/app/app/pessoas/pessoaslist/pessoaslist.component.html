@@ -1,4 +1,4 @@
-<div class="md-12 mb-3" style="background-color: rgb(231, 255, 231);">OLHA O NAVBAR AI</div>
+
 
 
 <div class="container">
@@ -6,7 +6,7 @@
     <div class="row text-start">
         <h2 class="col-md-10">Lista de Pessoas</h2>
         <div class="col-md-2">
-            <button type="button" class="btn btn-success offset-md-5">Cadastrar</button>
+            <input routerLink="/admin/pessoas/novo" type="button" class="btn btn-success offset-md-5" value="Cadastrar">
         </div>
     </div>
 
@@ -23,7 +23,7 @@
                 <tr *ngFor="let pessoa of lista" class="col-md-12">
 
                     <th class="col-md-2">
-                        <span>oi</span>
+                        <span>{{pessoa.id}}</span>
                     </th>
 
                     <th class="col-md-9 text-start">
@@ -36,6 +36,10 @@
                         <span *ngIf="pessoa.idade > 10" class="linha">
                             <td >{{pessoa.idade}}</td>
                         </span>
+                    </th>
+
+                    <th>
+                        <input routerLink="/admin/pessoas/editar/{{pessoa.id}}" type="button" value="editar">
                     </th>
                 </tr>
             </tbody>

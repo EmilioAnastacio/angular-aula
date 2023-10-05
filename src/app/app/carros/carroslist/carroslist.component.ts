@@ -16,12 +16,19 @@ export class CarroslistComponent {
     carro1.ano = 2010;
     
     let carro2: Carro = new Carro();
-    carro1.nome = 'Lancer';
-    carro1.ano = 2015;
+    carro2.nome = 'Lancer';
+    carro2.ano = 2015;
 
     let carro3: Carro = new Carro();
-    carro1.nome = 'Tracker';
-    carro1.ano = 2022;
+    carro3.nome = 'Tracker';
+    carro3.ano = 2022;
+
+    this.lista.push(carro1);
+    this.lista.push(carro2);
+    this.lista.push(carro3);
+
   }
+
+  
 
 }

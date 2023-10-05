@@ -1,9 +1,12 @@
+
+
+
 <div class="container">
 
     <div class="row text-start">
-        <h2 class="col-md-10">Lista de Pessoas</h2>
+        <h2 class="col-md-10">Lista de Livros</h2>
         <div class="col-md-2">
-            <input routerLink="/admin/carros/novo" type="button" class="btn btn-success offset-md-5" value="Cadastrar">
+            <input routerLink="/admin/livros/novo" type="button" class="btn btn-success offset-md-5" value="Cadastrar">
         </div>
     </div>
 
@@ -12,28 +15,32 @@
             <thead>
                 <tr>
                     <th scope="col" class="p-2">Id</th>
-                    <th scope="col" class="p-2 text-start">Nome</th>
-                    <th scope="col" class="p-2 ">Idade</th>
+                    <th scope="col" class="p-2 text-start">Autor</th>
+                    <th scope="col" class="p-2 ">Titulo</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let carro of lista" class="col-md-12">
+                <tr *ngFor="let livro of lista" class="col-md-12">
 
                     <th class="col-md-2">
                         <span>oi</span>
                     </th>
 
                     <th class="col-md-9 text-start">
-                        <span *ngIf="carro.ano > 10" class="linha text-start">
-                            <td >{{carro.nome}}</td>
+                        <span class="linha text-start">
+                            <td >{{livro.autor}}</td>
                         </span>
                     </th>
 
                     <th>
-                        <span *ngIf="carro.ano > 10" class="linha">
-                            <td >{{carro.ano}}</td>
+                        <span class="linha">
+                            <td >{{livro.titulo}}</td>
                         </span>
                     </th>
+
+                    <!-- <th>
+                        <input routerLink="/admin/livros/editar/{{livro.id}}" type="button" value="editar">
+                    </th> -->
                 </tr>
             </tbody>
         </table>

@@ -10,19 +10,36 @@ import { Pessoa } from '../pessoa';
 export class PessoasdetailsComponent {
 
   route = inject(ActivatedRoute);
+  lista: Pessoa[] = [];
   pessoa!: Pessoa;
+  meuValorNome: string = '';
+  meuValorIdade: number = 0;
 
   constructor(){
     let id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
 
     if(id){
-      //modo de edição do detalhe
-      //requisitar o objeto do back
-      //this.pessoa = new Pessoa("Emilio", 45);
+      //metodo para editar
+      
     }else{
-      //modo nodo do detalhe
-      //this.pessoa = new Pessoa("", 0);
+      //metodo para cadastrar
+      //   let newPessoa: Pessoa = new Pessoa();
+      //   newPessoa.nome = this.meuValorNome;
+      //   newPessoa.idade = this.meuValorIdade;
+      // this.lista.push(newPessoa);
+          
     }
+  }
+
+  enviaValor(): void{
+    console.log('Valor do input:', this.meuValorNome);
+    console.log('Valor do input:', this.meuValorIdade);
+
+    let newPessoa: Pessoa = new Pessoa();
+        newPessoa.nome = this.meuValorNome;
+        newPessoa.idade = this.meuValorIdade;
+      newPessoa.lista.push(newPessoa);
   }
 
 }
