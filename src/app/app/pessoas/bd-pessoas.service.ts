@@ -7,6 +7,7 @@ import { Pessoa } from './pessoa';
 export class BdPessoasService {
 
   lista: Pessoa[] = []
+  proximoId: number =4;
 
   constructor() {
 
@@ -16,12 +17,19 @@ export class BdPessoasService {
 
    }
 
+   adicionarPessoa(nome: string, idade: number): void{
+    const novaPessoa = new Pessoa(this.proximoId, nome, idade);
+    this.lista.push(novaPessoa);
+    this.proximoId++; 
+   }
+
    findId(id:number) :Pessoa{
     for(let i=0;i<this.lista.length;i++){
       if(this.lista[i].id == id){
         return this.lista[i];
       }
     }
+    this.proximoId++;
     return new Pessoa(0, "", 0);
    }
 }

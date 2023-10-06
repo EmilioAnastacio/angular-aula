@@ -36,9 +36,14 @@ addLista(pessoa : Pessoa){
   if(pessoa.id > 0){
     this.lista[this.indiceSelect] =pessoa;
   }else{
-    this.lista.push(pessoa);
+    this.adicionarPessoa(pessoa.nome, pessoa.idade);
+    //this.lista.push(pessoa);
   }
 
   this.modalService.dismissAll();
+}
+
+adicionarPessoa(nome:string, idade:number){
+  this.listaService.adicionarPessoa(nome,idade);
 }
 }
