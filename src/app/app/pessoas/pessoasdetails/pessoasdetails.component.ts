@@ -1,45 +1,40 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Pessoa } from '../pessoa';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BdPessoasService } from '../bd-pessoas.service';
 
 @Component({
   selector: 'app-pessoasdetails',
   templateUrl: './pessoasdetails.component.html',
   styleUrls: ['./pessoasdetails.component.scss']
 })
-export class PessoasdetailsComponent {
+export class PessoasdetailsComponent implements OnInit{
+
+//implements OnInit
 
   route = inject(ActivatedRoute);
+  modalService = inject(NgbModal);
   lista: Pessoa[] = [];
-  pessoa!: Pessoa;
-  meuValorNome: string = '';
-  meuValorIdade: number = 0;
+  banco = Inject(BdPessoasService);
+  @Input() pessoa: Pessoa = new Pessoa(0,"",0);  
+
+  @Output() retorno = new EventEmitter<Pessoa>();
 
   constructor(){
     let id = this.route.snapshot.paramMap.get('id');
     console.log(id);
-
     if(id){
-      //metodo para editar
-      
-    }else{
-      //metodo para cadastrar
-      //   let newPessoa: Pessoa = new Pessoa();
-      //   newPessoa.nome = this.meuValorNome;
-      //   newPessoa.idade = this.meuValorIdade;
-      // this.lista.push(newPessoa);
-          
+      this.pessoa = this.banco.BdPessoasService.findId(+id);
     }
   }
 
-  enviaValor(): void{
-    console.log('Valor do input:', this.meuValorNome);
-    console.log('Valor do input:', this.meuValorIdade);
+  ngOnInit() :void{
+    this.pessoa = Object.assign({}, this.pessoa)
+  }
 
-    let newPessoa: Pessoa = new Pessoa();
-        newPessoa.nome = this.meuValorNome;
-        newPessoa.idade = this.meuValorIdade;
-      newPessoa.lista.push(newPessoa);
+  salvar(){
+    this.retorno.emit(this.pessoa);
   }
 
 }

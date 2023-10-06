@@ -20,32 +20,56 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr *ngFor="let pessoa of lista" class="col-md-12">
+                <tr *ngFor="let pessoa of lista; let i = index" class="col-md-12">
 
                     <th class="col-md-2">
                         <span>{{pessoa.id}}</span>
                     </th>
-
                     <th class="col-md-9 text-start">
-                        <span *ngIf="pessoa.idade > 10" class="linha text-start">
+                        <span class="linha text-start">
                             <td >{{pessoa.nome}}</td>
                         </span>
                     </th>
-
                     <th>
-                        <span *ngIf="pessoa.idade > 10" class="linha">
+                        <span class="linha">
                             <td >{{pessoa.idade}}</td>
                         </span>
                     </th>
-
                     <th>
-                        <input routerLink="/admin/pessoas/editar/{{pessoa.id}}" type="button" value="editar">
+                        <!-- <input routerLink="/admin/pessoas/editar/{{pessoa.id}}" type="button" value="editar"> -->
+                        <button type="button" class="btn btn-primary" (click)="abrirModalEditar(modal, pessoa, i)"></button>
+
                     </th>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    <div>
+        <button (click)="abrirModal(modal)"></button>
+    </div>
+
+    <ng-template #modal let-modal>
+        <div class="modal-header">
+            <h4>Cadastrar Pessoa</h4>
+        </div>
+        <div>
+            <app-pessoasdetails [pessoa]="pessoaSelecionada" (retorno)="addLista($event)"></app-pessoasdetails>
+        </div>
+        <div class="modal-footer"></div>
+
+    </ng-template>
+
+
+    <ng-template #modalEditar let-modal>
+        <div class="modal-header">
+            <h4>Editar Pessoa</h4>
+        </div>
+        <div>
+            <!-- <app-pessoasdetails [pessoa]="livroSelecionado" (retorno)=""></app-pessoasdetails> -->
+        </div>
+
+    </ng-template>
     
 </div>
 
