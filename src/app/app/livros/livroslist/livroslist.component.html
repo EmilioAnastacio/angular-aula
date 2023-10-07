@@ -1,51 +1,66 @@
-
-
-
-<div class="container">
-
-    <div class="row text-start">
-        <h2 class="col-md-10">Lista de Livros</h2>
-        <div class="col-md-2">
-            <input routerLink="/admin/livros/novo" type="button" class="btn btn-success offset-md-5" value="Cadastrar">
+<div>
+    <div class="container">
+        <div class="row text-start ">
+            <h2 class="col-md-10">Lista de Livros</h2>
+            <div class="col-md-2">
+                <button (click)="abrirModal(modal)" type="button" class="btn btn-success offset-md-5">Cadastrar</button>
+                <!-- <input routerLink="/admin/pessoas/novo"  value="Cadastrar"> -->
+            </div>
         </div>
-    </div>
-
-    <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col" class="p-2">Id</th>
-                    <th scope="col" class="p-2 text-start">Autor</th>
-                    <th scope="col" class="p-2 ">Titulo</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                <tr *ngFor="let livro of lista" class="col-md-12">
-
-                    <th class="col-md-2">
-                        <span>oi</span>
-                    </th>
-
-                    <th class="col-md-9 text-start">
-                        <span class="linha text-start">
-                            <td >{{livro.autor}}</td>
-                        </span>
-                    </th>
-
-                    <th>
-                        <span class="linha">
-                            <td >{{livro.titulo}}</td>
-                        </span>
-                    </th>
-
-                    <!-- <th>
-                        <input routerLink="/admin/livros/editar/{{livro.id}}" type="button" value="editar">
-                    </th> -->
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
     
+        <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="p-2">Id</th>
+                        <th scope="col" class="p-2 text-start">Titulo</th>
+                        <th scope="col" class="p-2 ">Autor</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr *ngFor="let livro of lista; let i = index" class="col-md-12">
+    
+                        <th class="col-md-2">
+                            <span>{{livro.id}}</span>
+                        </th>
+                        <th class="col-md-5 text-start">
+                            <span class="linha text-start">
+                                <td >{{livro.autor}}</td>
+                            </span>
+                        </th>
+                        <th>
+                            <span class="linha">
+                                <td >{{livro.titulo}}</td>
+                            </span>
+                        </th>
+                        <th class="col-md-1">
+                            <!-- <input routerLink="/admin/livros/editar/{{livro.id}}" type="button" value="editar"> -->
+                            <button class="badge rounded-pill text-bg-primary retiraBorda" (click)="abrirModalEditar(modal, livro, i)">Editar</button>
+    
+                        </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    
+        <div>
+           
+        </div>
+    
+        <ng-template #modal let-modal>
+            <div class="modal-header">
+                <h4>Cadastrar livro</h4>
+            </div>
+            <div>
+                <app-livrosdetails [livro]="livroSelecionada" (retorno)="addLista($event)"></app-livrosdetails>
+            </div>
+            <div class="modal-footer"></div>
+    
+        </ng-template>    
+    </div>
+
 </div>
+
+
+
 
