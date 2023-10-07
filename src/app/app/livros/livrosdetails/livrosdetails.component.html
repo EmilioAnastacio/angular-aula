@@ -1,2 +1,15 @@
-<p>livrosdetails works!</p>
+<div class="container col-md-12">
 
+    <div class="col-md-5 offset-md-4 mb-3">
+        <label for="insertautor" class="col col-md-12 mb-1"> insira um autor</label>
+        <input id="insertautor" class="col" [(ngModel)]="livro.autor" placeholder="Nome" value="">
+    </div>
+    
+    <div class="col-md-5 offset-md-4">
+        <label for="inserttitulo" class="col col-md-12 mb-1"> insira uma titulo</label>
+        <input id="inserttitulo" [(ngModel)]="livro.titulo" class="col" placeholder="titulo" value="">
+    </div>
+    
+    <button (click)="salvar()" class=" btn btn-success offset-md-5">Cadastrar</button>
+    
+</div>

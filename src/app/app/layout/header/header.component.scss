@@ -1,0 +1,17 @@
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+.row {
+    --bs-gutter-x: 0
+    --bs-gutter-y: 0;
+  }
+
+  .header-Linear{
+    background: linear-gradient(45deg, #525dff, #525dff, #525dff);
+  }
+  .navbar {
+    --bs-navbar-padding-x: none;
+  }
+
+  .imagem{
+    width: 6.7%;
+  }

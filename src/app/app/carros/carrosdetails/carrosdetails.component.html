@@ -1,1 +1,15 @@
-<p>carrosdetails works!</p>
+<div class="container col-md-12">
+
+    <div class="col-md-5 offset-md-4 mb-3">
+        <label for="insertNome" class="col col-md-12 mb-1"> insira um nome</label>
+        <input id="insertNome" class="col" [(ngModel)]="carro.nome" placeholder="Nome" value="">
+    </div>
+    
+    <div class="col-md-5 offset-md-4">
+        <label for="insertano" class="col col-md-12 mb-1"> insira uma ano</label>
+        <input id="insertano" [(ngModel)]="carro.ano" class="col" placeholder="Idade" value="">
+    </div>
+    
+    <button (click)="salvar()" class=" btn btn-success offset-md-5">Cadastrar</button>
+    
+</div>

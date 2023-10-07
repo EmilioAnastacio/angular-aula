@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Pessoa } from '../pessoa';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BdPessoasService } from '../bd-pessoas.service';
 
 @Component({
   selector: 'app-pessoaslist',
@@ -9,26 +11,39 @@ import { Pessoa } from '../pessoa';
 
 export class PessoaslistComponent {
 
+  modalService = inject(NgbModal);
   lista: Pessoa[] = [];
+  indiceSelect!: number;
+  pessoaSelecionada!: Pessoa;
 
+  listaService = inject(BdPessoasService);
   constructor(){
-    let pessoa1: Pessoa = new Pessoa();
-    pessoa1.id = 1;
-    pessoa1.nome = 'Emilio Anastácio';
-    pessoa1.idade = 19;
-
-    let pessoa2: Pessoa = new Pessoa();
-    pessoa2.id = 2;
-    pessoa2.nome = 'Emilio Anastácio';
-    pessoa2.idade = 20;
-
-    let pessoa3: Pessoa = new Pessoa();
-    pessoa3.id = 3;
-    pessoa3.nome = 'Emilio Anastácio';
-    pessoa3.idade = 21;
-
-    this.lista.push(pessoa1);
-    this.lista.push(pessoa2);
-    this.lista.push(pessoa3);
+    this.lista = this.listaService.lista;
   }
+
+ abrirModal(modal: any){
+    this.pessoaSelecionada = new Pessoa(0,"",0);
+    this.modalService.open(modal, {size: 'lg'});
+ }
+
+ abrirModalEditar(editar: any, pessoa:any, indice: number){
+  this.indiceSelect = indice;
+  this.pessoaSelecionada = pessoa;
+  this.modalService.open(editar, {size: 'lg'});
+}
+
+addLista(pessoa : Pessoa){
+  if(pessoa.id > 0){
+    this.lista[this.indiceSelect] =pessoa;
+  }else{
+    this.adicionarPessoa(pessoa.nome, pessoa.idade);
+    //this.lista.push(pessoa);
+  }
+
+  this.modalService.dismissAll();
+}
+
+adicionarPessoa(nome:string, idade:number){
+  this.listaService.adicionarPessoa(nome,idade);
+}
 }

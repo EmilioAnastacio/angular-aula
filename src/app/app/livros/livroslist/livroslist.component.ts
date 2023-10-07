@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Livros } from '../livros';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BdLivroService } from '../bd-livro.service';
 
 @Component({
   selector: 'app-livroslist',
@@ -7,25 +9,40 @@ import { Livros } from '../livros';
   styleUrls: ['./livroslist.component.scss']
 })
 export class LivroslistComponent {
-
+  modalService = inject(NgbModal);
   lista: Livros[] = [];
+  indiceSelect!: number;
+  livroSelecionada!: Livros;
 
+  listaService = inject(BdLivroService);
   constructor(){
-    let livro1: Livros = new Livros;
-    livro1.autor ='Emilio';
-    livro1.titulo ='milho';
-
-    let livro2: Livros = new Livros;
-    livro2.autor ='Luiz';
-    livro2.titulo ='cafe';
-
-    let livro3: Livros = new Livros;
-    livro3.autor ='Neymar';
-    livro3.titulo ='traição';
-
-    this.lista.push(livro1);
-    this.lista.push(livro2);
-    this.lista.push(livro3);
+    this.lista = this.listaService.lista;
   }
+
+ abrirModal(modal: any){
+    this.livroSelecionada = new Livros(0,"","");
+    this.modalService.open(modal, {size: 'lg'});
+ }
+
+ abrirModalEditar(editar: any, livros:any, indice: number){
+  this.indiceSelect = indice;
+  this.livroSelecionada = livros;
+  this.modalService.open(editar, {size: 'lg'});
+}
+
+addLista(livros : Livros){
+  if(livros.id > 0){
+    this.lista[this.indiceSelect] = livros;
+  }else{
+    this.adicionarLivro(livros.titulo, livros.autor);
+    //this.lista.push(pessoa);
+  }
+
+  this.modalService.dismissAll();
+}
+
+adicionarLivro(titulo:string, autor:string){
+  this.listaService.adicionarLivro(titulo,autor);
+}
 
 }
