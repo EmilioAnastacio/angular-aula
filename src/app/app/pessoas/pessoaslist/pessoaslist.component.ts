@@ -52,9 +52,14 @@ addOuEditarPessoa(pessoa : Pessoa){
   if(pessoa.id > 0){
     this.lista[this.indiceSelecionadoParaEdicao] =pessoa;
   }else{
-    this.lista.push(pessoa);
+    this.adicionarPessoa(pessoa.nome, pessoa.idade);
+    //this.lista.push(pessoa);
   }
 
   this.modalService.dismissAll();
+}
+
+adicionarPessoa(nome:string, idade:number){
+  this.listaService.adicionarPessoa(nome,idade);
 }
 }

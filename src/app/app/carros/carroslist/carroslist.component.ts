@@ -10,8 +10,6 @@ import { CarrosServiceService } from '../service/carros-service.service';
 })
 export class CarroslistComponent {
 
-  lista: Carro[] = [];
-
   carroSelecionadaParaEdicao: Carro = new Carro();
   indiceSelecionadoParaEdicao!: number;
 

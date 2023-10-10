@@ -1,3 +1,4 @@
+
 <div class="container">
     <h3 class="alert alert-primary">Listagem de Carros!</h3>
     <td> <button class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button> </td>
@@ -23,10 +24,21 @@
             </table>
 
 
+
         </div>
+    
+        <ng-template #modal let-modal>
+            <div class="modal-header">
+                <h4>Cadastrar Carro</h4>
+            </div>
+            <div>
+                <app-carrosdetails [carro]="carroSelecionada" (retorno)="addLista($event)"></app-carrosdetails>
+            </div>
+            <div class="modal-footer"></div>
+    
+        </ng-template>    
     </div>
 </div>
-
 
 <ng-template #modal1 let-modal>
     <div class="modal-header">
@@ -42,3 +54,4 @@
         <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
     </div>
 </ng-template>
+

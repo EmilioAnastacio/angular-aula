@@ -3,15 +3,13 @@ import { Livros } from '../livros';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LivrosServiceService } from '../service/livros-service.service';
 
+
 @Component({
   selector: 'app-livroslist',
   templateUrl: './livroslist.component.html',
   styleUrls: ['./livroslist.component.scss']
 })
 export class LivroslistComponent {
-
-  lista: Livros[] = [];
-
   livroSelecionadaParaEdicao: Livros = new Livros();
   indiceSelecionadoParaEdicao!: number;
 
@@ -56,6 +54,7 @@ export class LivroslistComponent {
 
     this.modalService.dismissAll();
   }
+
 }
 
 

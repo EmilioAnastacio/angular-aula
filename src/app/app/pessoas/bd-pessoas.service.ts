@@ -41,6 +41,4 @@ export class BdPessoasService {
   private update(salvar: Partial<Pessoa>){
     return this.http.put<Pessoa>(`api/pessoa/editar/${salvar.id}`, salvar);
   }
-
-
 }

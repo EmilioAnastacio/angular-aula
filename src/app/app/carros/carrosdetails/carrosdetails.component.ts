@@ -1,14 +1,17 @@
+
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Carro } from '../carro';
-import { CarrosServiceService } from '../service/carros-service.service';
+import { CarrosServiceService } from '../service/carros-service.service'
 
 @Component({
   selector: 'app-carrosdetails',
   templateUrl: './carrosdetails.component.html',
   styleUrls: ['./carrosdetails.component.scss']
 })
-export class CarrosdetailsComponent {
+export class CarrosdetailsComponent implements OnInit{
+  
+//implements OnInit
 
   @Input() carro: Carro = new Carro();  
   @Output() retorno = new EventEmitter<Carro>();
@@ -20,6 +23,7 @@ export class CarrosdetailsComponent {
   ngOnInit() :void{
     
   }
+
 
   salvar(){
     this.carroService.save(this.carro).subscribe({

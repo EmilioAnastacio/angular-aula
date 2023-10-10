@@ -1,3 +1,4 @@
+
 <div class="container">
     <h3 class="alert alert-primary">Listagem de Livros!</h3>
     <td> <button class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button> </td>
@@ -23,10 +24,21 @@
             </table>
 
 
+
         </div>
+    
+        <ng-template #modal let-modal>
+            <div class="modal-header">
+                <h4>Cadastrar livro</h4>
+            </div>
+            <div>
+                <app-livrosdetails [livro]="livroSelecionada" (retorno)="addLista($event)"></app-livrosdetails>
+            </div>
+            <div class="modal-footer"></div>
+    
+        </ng-template>    
     </div>
 </div>
-
 
 <ng-template #modal1 let-modal>
     <div class="modal-header">
