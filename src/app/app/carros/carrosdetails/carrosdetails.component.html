@@ -1,15 +1,14 @@
-<div class="container col-md-12">
 
-    <div class="col-md-5 offset-md-4 mb-3">
-        <label for="insertNome" class="col col-md-12 mb-1"> insira um nome</label>
-        <input id="insertNome" class="col" [(ngModel)]="carro.nome" placeholder="Nome" value="">
+<form (ngSubmit)="salvar()">
+    <div class="mb-3">
+        <label for="exampleInputText1" class="form-label">Nome:</label>
+        <input type="text" class="form-control" name="exampleInputText1" aria-describedby="emailHelp"
+            [(ngModel)]="carro.nome">
     </div>
-    
-    <div class="col-md-5 offset-md-4">
-        <label for="insertano" class="col col-md-12 mb-1"> insira uma ano</label>
-        <input id="insertano" [(ngModel)]="carro.ano" class="col" placeholder="Idade" value="">
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Idade:</label>
+        <input type="number" class="form-control" name="exampleInputPassword1" [(ngModel)]="carro.ano">
     </div>
-    
-    <button (click)="salvar()" class=" btn btn-success offset-md-5">Cadastrar</button>
-    
-</div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+

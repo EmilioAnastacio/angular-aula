@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Carro } from '../carro';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { BdCarrosService } from '../bd-carros.service';
+import { CarrosServiceService } from '../service/carros-service.service';
 
 @Component({
   selector: 'app-carroslist',
@@ -10,42 +10,49 @@ import { BdCarrosService } from '../bd-carros.service';
 })
 export class CarroslistComponent {
 
-  modalService = inject(NgbModal);
-  lista: Carro[] = [];
-  indiceSelect!: number;
-  carroSelecionada!: Carro;
+  carroSelecionadaParaEdicao: Carro = new Carro();
+  indiceSelecionadoParaEdicao!: number;
 
-  listaService = inject(BdCarrosService);
+  modalService = inject(NgbModal);
+  listaService = inject(CarrosServiceService);
+
   constructor(){
-    this.lista = this.listaService.lista;
+    this.listAll();
   }
 
- abrirModal(modal: any){
-    this.carroSelecionada = new Carro(0,"",0);
+
+  listAll() {
+    this.listaService.listAll().subscribe({
+      next: lista => { // QUANDO DÁ CERTO
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+  }
+
+
+ adicionar(modal: any){
+    this.carroSelecionadaParaEdicao = new Carro();
     this.modalService.open(modal, {size: 'lg'});
  }
 
- abrirModalEditar(editar: any, carro:any, indice: number){
-  this.indiceSelect = indice;
-  this.carroSelecionada = carro;
+ editar(editar: any, carro:any, indice: number){
+  this.indiceSelecionadoParaEdicao = indice;
+  this.carroSelecionadaParaEdicao = carro;
   this.modalService.open(editar, {size: 'lg'});
 }
 
-addLista(carro : Carro){
+addOuEditarCarro(carro : Carro){
   if(carro.id > 0){
-    this.lista[this.indiceSelect] =carro;
+    this.lista[this.indiceSelecionadoParaEdicao] =carro;
   }else{
-    this.adicionarCarro(carro.nome, carro.ano);
-    //this.lista.push(pessoa);
+    this.lista.push(carro);
   }
 
   this.modalService.dismissAll();
 }
-
-adicionarCarro(nome:string, idade:number){
-  this.listaService.adicionarCarro(nome,idade);
-}
-
-  
 
 }
