@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Livros } from '../livros';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LivrosServiceService } from '../service/livros-service.service';
 
 @Component({
   selector: 'app-livroslist',
@@ -10,22 +12,51 @@ export class LivroslistComponent {
 
   lista: Livros[] = [];
 
-  constructor(){
-    let livro1: Livros = new Livros;
-    livro1.autor ='Emilio';
-    livro1.titulo ='milho';
+  livroSelecionadaParaEdicao: Livros = new Livros();
+  indiceSelecionadoParaEdicao!: number;
 
-    let livro2: Livros = new Livros;
-    livro2.autor ='Luiz';
-    livro2.titulo ='cafe';
+  modalService = inject(NgbModal);
+  listaService = inject(LivrosServiceService);
 
-    let livro3: Livros = new Livros;
-    livro3.autor ='Neymar';
-    livro3.titulo ='traição';
-
-    this.lista.push(livro1);
-    this.lista.push(livro2);
-    this.lista.push(livro3);
+  constructor() {
+    this.listAll();
   }
 
+
+  listAll() {
+    this.listaService.listAll().subscribe({
+      next: lista => { // QUANDO DÁ CERTO
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+  }
+
+
+  adicionar(modal: any) {
+    this.livroSelecionadaParaEdicao = new Livros();
+    this.modalService.open(modal, { size: 'lg' });
+  }
+
+  editar(editar: any, livro: any, indice: number) {
+    this.indiceSelecionadoParaEdicao = indice;
+    this.livroSelecionadaParaEdicao = livro;
+    this.modalService.open(editar, { size: 'lg' });
+  }
+
+  addOuEditarLivro(livro: Livros) {
+    if (livro.id > 0) {
+      this.lista[this.indiceSelecionadoParaEdicao] = livro;
+    } else {
+      this.lista.push(livro);
+    }
+
+    this.modalService.dismissAll();
+  }
 }
+
+
+

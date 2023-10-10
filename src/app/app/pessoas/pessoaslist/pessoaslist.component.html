@@ -1,75 +1,44 @@
-
-
-
 <div class="container">
+    <h3 class="alert alert-primary">Listagem de pessoas!</h3>
+    <td> <button class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button> </td>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#ID</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Idade</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let pessoa of lista; let i = index">
+                        <th scope="row">{{ pessoa.id }}</th>
+                        <td> {{ pessoa.nome }} </td>
+                        <td> {{ pessoa.idade }} </td>
+                        <td> <button class="btn btn-primary" (click)="editar(modal1, pessoa, i)">Editar</button> </td>
+                    </tr>
+                </tbody>
+            </table>
 
-    <div class="row text-start">
-        <h2 class="col-md-10">Lista de Pessoas</h2>
-        <div class="col-md-2">
-            <input routerLink="/admin/pessoas/novo" type="button" class="btn btn-success offset-md-5" value="Cadastrar">
+
         </div>
     </div>
-
-    <div class="border" style="border-radius: 20px;background-color: white;padding: 6px;">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col" class="p-2">Id</th>
-                    <th scope="col" class="p-2 text-start">Nome</th>
-                    <th scope="col" class="p-2 ">Idade</th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                <tr *ngFor="let pessoa of lista; let i = index" class="col-md-12">
-
-                    <th class="col-md-2">
-                        <span>{{pessoa.id}}</span>
-                    </th>
-                    <th class="col-md-9 text-start">
-                        <span class="linha text-start">
-                            <td >{{pessoa.nome}}</td>
-                        </span>
-                    </th>
-                    <th>
-                        <span class="linha">
-                            <td >{{pessoa.idade}}</td>
-                        </span>
-                    </th>
-                    <th>
-                        <!-- <input routerLink="/admin/pessoas/editar/{{pessoa.id}}" type="button" value="editar"> -->
-                        <button type="button" class="btn btn-primary" (click)="abrirModalEditar(modal, pessoa, i)"></button>
-
-                    </th>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div>
-        <button (click)="abrirModal(modal)"></button>
-    </div>
-
-    <ng-template #modal let-modal>
-        <div class="modal-header">
-            <h4>Cadastrar Pessoa</h4>
-        </div>
-        <div>
-            <app-pessoasdetails [pessoa]="pessoaSelecionada" (retorno)="addLista($event)"></app-pessoasdetails>
-        </div>
-        <div class="modal-footer"></div>
-
-    </ng-template>
-
-
-    <ng-template #modalEditar let-modal>
-        <div class="modal-header">
-            <h4>Editar Pessoa</h4>
-        </div>
-        <div>
-            <!-- <app-pessoasdetails [pessoa]="livroSelecionado" (retorno)=""></app-pessoasdetails> -->
-        </div>
-
-    </ng-template>
-    
 </div>
 
+
+<ng-template #modal1 let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+       
+        <app-pessoasdetails [pessoa]="pessoaSelecionadaParaEdicao" (retorno)="addOuEditarPessoa($event)" ></app-pessoasdetails>
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+    </div>
+</ng-template>

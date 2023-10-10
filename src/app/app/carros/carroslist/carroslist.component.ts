@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Carro } from '../carro';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CarrosServiceService } from '../service/carros-service.service';
 
 @Component({
   selector: 'app-carroslist',
@@ -10,25 +12,49 @@ export class CarroslistComponent {
 
   lista: Carro[] = [];
 
+  carroSelecionadaParaEdicao: Carro = new Carro();
+  indiceSelecionadoParaEdicao!: number;
+
+  modalService = inject(NgbModal);
+  listaService = inject(CarrosServiceService);
+
   constructor(){
-    let carro1: Carro = new Carro();
-    carro1.nome = 'Palio';
-    carro1.ano = 2010;
-    
-    let carro2: Carro = new Carro();
-    carro2.nome = 'Lancer';
-    carro2.ano = 2015;
-
-    let carro3: Carro = new Carro();
-    carro3.nome = 'Tracker';
-    carro3.ano = 2022;
-
-    this.lista.push(carro1);
-    this.lista.push(carro2);
-    this.lista.push(carro3);
-
+    this.listAll();
   }
 
-  
+
+  listAll() {
+    this.listaService.listAll().subscribe({
+      next: lista => { // QUANDO DÁ CERTO
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+  }
+
+
+ adicionar(modal: any){
+    this.carroSelecionadaParaEdicao = new Carro();
+    this.modalService.open(modal, {size: 'lg'});
+ }
+
+ editar(editar: any, carro:any, indice: number){
+  this.indiceSelecionadoParaEdicao = indice;
+  this.carroSelecionadaParaEdicao = carro;
+  this.modalService.open(editar, {size: 'lg'});
+}
+
+addOuEditarCarro(carro : Carro){
+  if(carro.id > 0){
+    this.lista[this.indiceSelecionadoParaEdicao] =carro;
+  }else{
+    this.lista.push(carro);
+  }
+
+  this.modalService.dismissAll();
+}
 
 }

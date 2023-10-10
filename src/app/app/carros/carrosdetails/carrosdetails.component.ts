@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Carro } from '../carro';
+import { CarrosServiceService } from '../service/carros-service.service';
 
 @Component({
   selector: 'app-carrosdetails',
@@ -8,12 +10,26 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class CarrosdetailsComponent {
 
-  route = inject(ActivatedRoute);
+  @Input() carro: Carro = new Carro();  
+  @Output() retorno = new EventEmitter<Carro>();
 
-  constructor(){
-    let id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
+  carroService = inject(CarrosServiceService);
+
+  constructor(){}
+
+  ngOnInit() :void{
+    
   }
-  
 
+  salvar(){
+    this.carroService.save(this.carro).subscribe({
+      next: pessoa => { // QUANDO DÁ CERTO
+        this.retorno.emit(pessoa);
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+  }
 }

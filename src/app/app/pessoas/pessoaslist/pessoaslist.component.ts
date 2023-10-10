@@ -11,30 +11,46 @@ import { BdPessoasService } from '../bd-pessoas.service';
 
 export class PessoaslistComponent {
 
-  modalService = inject(NgbModal);
   lista: Pessoa[] = [];
-  indiceSelect!: number;
-  pessoaSelecionada!: Pessoa;
 
+  pessoaSelecionadaParaEdicao: Pessoa = new Pessoa();
+  indiceSelecionadoParaEdicao!: number;
+
+  modalService = inject(NgbModal);
   listaService = inject(BdPessoasService);
+
   constructor(){
-    this.lista = this.listaService.lista;
+    this.listAll();
   }
 
- abrirModal(modal: any){
-    this.pessoaSelecionada = new Pessoa(0,"",0);
+
+  listAll() {
+    this.listaService.listAll().subscribe({
+      next: lista => { // QUANDO DÁ CERTO
+        this.lista = lista;
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
+  }
+
+
+ adicionar(modal: any){
+    this.pessoaSelecionadaParaEdicao = new Pessoa();
     this.modalService.open(modal, {size: 'lg'});
  }
 
- abrirModalEditar(editar: any, pessoa:any, indice: number){
-  this.indiceSelect = indice;
-  this.pessoaSelecionada = pessoa;
+ editar(editar: any, pessoa:any, indice: number){
+  this.indiceSelecionadoParaEdicao = indice;
+  this.pessoaSelecionadaParaEdicao = pessoa;
   this.modalService.open(editar, {size: 'lg'});
 }
 
-addLista(pessoa : Pessoa){
+addOuEditarPessoa(pessoa : Pessoa){
   if(pessoa.id > 0){
-    this.lista[this.indiceSelect] =pessoa;
+    this.lista[this.indiceSelecionadoParaEdicao] =pessoa;
   }else{
     this.lista.push(pessoa);
   }

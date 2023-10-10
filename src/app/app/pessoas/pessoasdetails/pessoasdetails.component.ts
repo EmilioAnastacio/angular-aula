@@ -11,30 +11,27 @@ import { BdPessoasService } from '../bd-pessoas.service';
 })
 export class PessoasdetailsComponent implements OnInit{
 
-//implements OnInit
-
-  route = inject(ActivatedRoute);
-  modalService = inject(NgbModal);
-  lista: Pessoa[] = [];
-  banco = Inject(BdPessoasService);
-  @Input() pessoa: Pessoa = new Pessoa(0,"",0);  
-
+  @Input() pessoa: Pessoa = new Pessoa();  
   @Output() retorno = new EventEmitter<Pessoa>();
 
-  constructor(){
-    let id = this.route.snapshot.paramMap.get('id');
-    console.log(id);
-    if(id){
-      this.pessoa = this.banco.BdPessoasService.findId(+id);
-    }
-  }
+  pessoaService = inject(BdPessoasService)
+
+  constructor(){}
 
   ngOnInit() :void{
-    this.pessoa = Object.assign({}, this.pessoa)
+    
   }
 
   salvar(){
-    this.retorno.emit(this.pessoa);
+    this.pessoaService.save(this.pessoa).subscribe({
+      next: pessoa => { // QUANDO DÁ CERTO
+        this.retorno.emit(pessoa);
+      },
+      error: erro => { // QUANDO DÁ ERRO
+        alert('Exemplo de tratamento de erro/exception! Observe o erro no console!');
+        console.error(erro);
+      }
+    });
   }
 
 }
