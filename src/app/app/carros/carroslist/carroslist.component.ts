@@ -47,6 +47,13 @@ export class CarroslistComponent {
   this.modalService.open(editar, {size: 'lg'});
 }
 
+deletar(carro: Carro){
+  this.listaService.deletar(carro.id).subscribe(
+    ()=>{
+      alert("Carro Deletado com sucesso");
+    })
+}
+
 addOuEditarCarro(carro : Carro){
   if(carro.id > 0){
     this.lista[this.indiceSelecionadoParaEdicao] =carro;

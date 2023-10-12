@@ -48,6 +48,13 @@ export class PessoaslistComponent {
   this.modalService.open(editar, {size: 'lg'});
 }
 
+deletar(pessoa: Pessoa){
+  this.listaService.deletar(pessoa.id).subscribe(
+    ()=>{
+      alert("Pessoa Deletado com sucesso");
+    })
+}
+
 addOuEditarPessoa(pessoa : Pessoa){
   if(pessoa.id > 0){
     this.lista[this.indiceSelecionadoParaEdicao] =pessoa;

@@ -16,6 +16,7 @@ import { FooterComponent } from './app/layout/footer/footer.component';
 import { LoginComponent } from './app/sistema/login/login.component';
 import { LivroslistComponent } from './app/livros/livroslist/livroslist.component';
 import { LivrosdetailsComponent } from './app/livros/livrosdetails/livrosdetails.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { LivrosdetailsComponent } from './app/livros/livrosdetails/livrosdetails
     FormsModule,
     AppRoutingModule,
     NgbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

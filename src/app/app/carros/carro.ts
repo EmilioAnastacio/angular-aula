@@ -1,6 +1,6 @@
 export class Carro{
-    nome!: string;
-    ano!: number;
+    modelo!: string;
+    marca!: string;
     id!: number;
     //fdhsuhdsu
 }

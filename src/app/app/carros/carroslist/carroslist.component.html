@@ -7,17 +7,19 @@
                 <thead>
                     <tr>
                         <th scope="col">#ID</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Ano</th>
+                        <th scope="col">MODELO</th>
+                        <th scope="col">MARCA</th>
                         <th scope="col">Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let carro of lista; let i = index">
                         <th scope="row">{{ carro.id }}</th>
-                        <td> {{ carro.nome }} </td>
-                        <td> {{ carro.ano }} </td>
-                        <td> <button class="btn btn-primary" (click)="editar(modal1, carro, i)">Editar</button> </td>
+                        <td> {{ carro.modelo }} </td>
+                        <td> {{ carro.marca }} </td>
+                        <td> <button class="btn btn-primary" (click)="editar(modal1, carro, i)">Editar</button>
+                            <button class="btn btn-danger ms-1" (click)="deletar(carro)">Deletar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

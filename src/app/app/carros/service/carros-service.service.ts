@@ -8,7 +8,7 @@ import { Carro } from '../carro';
 })
 export class CarrosServiceService {
 
-  API: string = 'http://localhost:8080/api/carro';
+  API: string = 'http://localhost:8080/api/carro/listar';
   http = inject(HttpClient);
 
   constructor() {}
@@ -35,11 +35,16 @@ export class CarrosServiceService {
   } 
 
   private create(salvar: Partial<Carro>){
-    return this.http.post<Carro>(`api/carros/cadastrar`, salvar);
+    return this.http.post<Carro>(`http://localhost:8080/api/carro/cadastrar`, salvar);
   }
 
   private update(salvar: Partial<Carro>){
-    return this.http.put<Carro>(`api/carro/editar/${salvar.id}`, salvar);
+    return this.http.put<Carro>(`http://localhost:8080/api/carro/editar/${salvar.id}`, salvar);
+  }
+
+  deletar(id: number){
+    return this.http.delete<Carro>(`http://localhost:8080/api/carro/deletar/${id}`);
+ 
   }
 
 

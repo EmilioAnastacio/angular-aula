@@ -14,7 +14,7 @@ export class BdPessoasService {
   constructor() {}
 
   listAll(): Observable<Pessoa[]> {
-    return this.http.get<Pessoa[]>(this.API);
+    return this.http.get<Pessoa[]>('http://localhost:8080/api/pessoa/buscar');
   }
 
   save(salvar: Partial<Pessoa>){
@@ -35,11 +35,16 @@ export class BdPessoasService {
   } 
 
   private create(salvar: Partial<Pessoa>){
-    return this.http.post<Pessoa>(`api/pessoa/cadastrar`, salvar);
+    return this.http.post<Pessoa>(`http://localhost:8080/api/pessoa/cadastrar`, salvar);
   }
 
   private update(salvar: Partial<Pessoa>){
-    return this.http.put<Pessoa>(`api/pessoa/editar/${salvar.id}`, salvar);
+    return this.http.put<Pessoa>(`http://localhost:8080/api/pessoa/editar/${salvar.id}`, salvar);
+  }
+
+  deletar(id: number){
+    return this.http.delete<Pessoa>(`http://localhost:8080/api/pessoa/deletar/${id}`);
+ 
   }
 
 

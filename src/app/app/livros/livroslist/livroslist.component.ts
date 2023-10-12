@@ -47,6 +47,13 @@ export class LivroslistComponent {
     this.modalService.open(editar, { size: 'lg' });
   }
 
+  deletar(livro: Livros){
+    this.listaService.deletar(livro.id).subscribe(
+      ()=>{
+        alert("Livro Deletado com sucesso");
+      })
+  }
+
   addOuEditarLivro(livro: Livros) {
     if (livro.id > 0) {
       this.lista[this.indiceSelecionadoParaEdicao] = livro;

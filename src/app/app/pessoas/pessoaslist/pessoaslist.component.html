@@ -1,3 +1,4 @@
+<span>AAAAAA</span>
 <div class="container">
     <h3 class="alert alert-primary">Listagem de pessoas!</h3>
     <td> <button class="btn btn-primary" (click)="adicionar(modal1)">Adicionar</button> </td>
@@ -17,7 +18,9 @@
                         <th scope="row">{{ pessoa.id }}</th>
                         <td> {{ pessoa.nome }} </td>
                         <td> {{ pessoa.idade }} </td>
-                        <td> <button class="btn btn-primary" (click)="editar(modal1, pessoa, i)">Editar</button> </td>
+                        <td> <button class="btn btn-primary" (click)="editar(modal1, pessoa, i)">Editar</button>
+                            <button class="btn btn-danger" (click)="deletar(pessoa)">Deletar</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

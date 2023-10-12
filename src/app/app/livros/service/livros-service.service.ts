@@ -14,7 +14,7 @@ export class LivrosServiceService {
   constructor() {}
 
   listAll(): Observable<Livros[]> {
-    return this.http.get<Livros[]>(this.API);
+    return this.http.get<Livros[]>('http://localhost:8080/api/livro/listar');
   }
 
   save(salvar: Partial<Livros>){
@@ -31,15 +31,20 @@ export class LivrosServiceService {
   }
 
   findById(id: string){
-    return this.http.get<Livros>(`api/livro/id/${id}`);
+    return this.http.get<Livros>(`api/livro/buscar/${id}`);
   } 
 
   private create(salvar: Partial<Livros>){
-    return this.http.post<Livros>(`api/livro/cadastrar`, salvar);
+    return this.http.post<Livros>(`http://localhost:8080/api/livro/cadastrar`, salvar);
   }
 
   private update(salvar: Partial<Livros>){
-    return this.http.put<Livros>(`api/livro/editar/${salvar.id}`, salvar);
+    return this.http.put<Livros>(`http://localhost:8080/api/livro/editar/${salvar.id}`, salvar);
+  }
+
+  deletar(id: number){
+    return this.http.delete<Livros>(`http://localhost:8080/api/livro/deletar/${id}`);
+ 
   }
 
 }
